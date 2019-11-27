@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: uaa-service
+  main:
+    allow-bean-definition-overriding: true  #\u89E3\u51B3bean\u91CD\u590D\u5B9A\u4E49
+  http:  #\u89E3\u51B3\u4E71\u7801
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+  freemarker:
+    enabled: true
+    suffix: .html
+    request-context-attribute: rc
+    content-type: text/html
+    charset: UTF-8
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: true
+  profiles:
+    active: dev
+server:
+  port: 53020
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+  servlet:
+    context-path: /uaa
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types[0]: text/xml
+      mime-types[1]: application/xml
+      mime-types[2]: application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
